@@ -13,7 +13,6 @@ sealed class Screen(val route: String) {
     object Admin:Screen("admin")
     object Tecnologias:Screen("tecnologias")
     object Supervistor:Screen("supervistor")
-}
 
     data class Detail(val itemId: String) : Screen("detail/{itemId}"){
         fun buildRoute():String{
