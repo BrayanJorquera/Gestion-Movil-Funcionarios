@@ -1,11 +1,14 @@
 package com.duoc.gestion_movil_funcionarios.repository
+import com.duoc.gestion_movil_funcionarios.model.Jornada
 import com.duoc.gestion_movil_funcionarios.model.Rol
 import com.duoc.gestion_movil_funcionarios.model.Usuario
+import java.time.DayOfWeek
+import java.time.LocalDate
+import java.time.LocalTime
 
 object UsuarioRepository {
-    private val jornadaRepository: JornadaRepository = JornadaRepository()
-    private val turnosM = jornadaRepository.turnosM()
-    private val turnosT = jornadaRepository.turnosT()
+    private val turnosM = JornadaRepository.turnosM()
+    private val turnosT = JornadaRepository.turnosT()
     private var usuarios = mutableListOf(  Usuario(11111111,"1","Funcionario Mañana",
                                                             "Funcionario_M@salud.cmq.cl",
                                                             Rol.FuncionarioSalud, turnosM),
@@ -37,5 +40,33 @@ object UsuarioRepository {
     //Verifica que el correo esté en la lista de usuarios
     fun usuarioExiste(correo: String): Boolean{
         return usuarios.any { it.correo.equals(correo, ignoreCase = true) }
+    }
+
+    //Obtiene un usuario por su correo
+    fun obtenerUsuarioPorCorreo(correo: String): Usuario? {
+        if(usuarioExiste(correo)){
+            return usuarios.find { it.correo.equals(correo, ignoreCase = true) }
+        }
+        return null
+    }
+
+    //Verigica si el usuario está en turno
+    fun estaEnTurno(correo: String,
+                    diaActual: DayOfWeek = LocalDate.now().dayOfWeek,
+                    horaActual: LocalTime = LocalTime.now()): Boolean {
+        val usuario = obtenerUsuarioPorCorreo(correo) ?: return false //Obtiene el usuario
+        val jornadaHoy = usuario.turnos.turnos[diaActual] ?: return false //Comprueba si traba hoy
+
+        return when (jornadaHoy) { //Retorna verdadero si esta en turno
+            is Jornada.Turno -> {
+                // Maneja tanto rangos normales como turnos que crucen la medianoche
+                if (jornadaHoy.horaTer.isBefore(jornadaHoy.horaIni)) {
+                    horaActual >= jornadaHoy.horaIni || horaActual <= jornadaHoy.horaTer
+                } else {
+                    horaActual >= jornadaHoy.horaIni && horaActual <= jornadaHoy.horaTer
+                }
+            }
+            is Jornada.Libre -> false
+        }
     }
 }

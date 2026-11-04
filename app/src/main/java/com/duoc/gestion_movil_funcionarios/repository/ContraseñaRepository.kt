@@ -1,4 +1,4 @@
-package com.duoc.gestion_movil_funcionarios.model
+package com.duoc.gestion_movil_funcionarios.repository
 import org.duoc.hashPasword
 
 //En una clase aparte para simular la llama a una API

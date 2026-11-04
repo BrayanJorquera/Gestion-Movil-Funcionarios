@@ -1,9 +1,8 @@
 package com.duoc.gestion_movil_funcionarios.viewmodel
-
 import androidx.lifecycle.ViewModel
 import com.duoc.gestion_movil_funcionarios.model.LoginErrors
 import com.duoc.gestion_movil_funcionarios.model.LoginUiState
-import com.duoc.gestion_movil_funcionarios.model.validatePassword
+import com.duoc.gestion_movil_funcionarios.repository.validatePassword
 import com.duoc.gestion_movil_funcionarios.repository.UsuarioRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -25,15 +24,16 @@ class LoginViewModel: ViewModel() {
         val estadoActual = _estado.value
         val errores = LoginErrors(
             correo = when{
-                estadoActual.correo.isBlank() -> "El correo no puede estar vacio"
-                !estadoActual.correo.contains("@") -> "El correo no es valido"
-                !estadoActual.correo.contains("@salud.cmq.cl") -> "Solo se aceptan correo del dominio salud.cmq.cl"
-                !UsuarioRepository.usuarioExiste(estadoActual.correo) -> "Usuario no registrado"
+                estadoActual.correo.isBlank() -> "Error: El correo no puede estar vacio"
+                !estadoActual.correo.contains("@") -> "Error: El correo no es valido"
+                !estadoActual.correo.contains("@salud.cmq.cl") -> "Error: Solo se aceptan correo del dominio salud.cmq.cl"
+                !UsuarioRepository.usuarioExiste(estadoActual.correo) -> "Error: Usuario no registrado"
+                !UsuarioRepository.estaEnTurno(estadoActual.correo) -> "Acceso denegado: Se encuentra fuera de su jornada laboral"
                 else -> null
             },
             contrasena = when{
-                estadoActual.contrasena.isBlank() -> "La contraseña no puede estar vacia"
-                !validatePassword(estadoActual.correo, estadoActual.contrasena) -> "Usuario y/o Contraseña incorrectos"
+                estadoActual.contrasena.isBlank() -> "Error: La contraseña no puede estar vacia"
+                !validatePassword(estadoActual.correo, estadoActual.contrasena) -> "Error: usuario y/o contraseña incorrectos"
                 else -> null
             }
         )

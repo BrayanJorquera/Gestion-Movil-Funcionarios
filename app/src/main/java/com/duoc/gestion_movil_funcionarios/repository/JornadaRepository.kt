@@ -4,7 +4,7 @@ import com.duoc.gestion_movil_funcionarios.model.Jornada
 import java.time.DayOfWeek
 import java.time.LocalTime
 
-class JornadaRepository {
+object JornadaRepository {
     private val horaIniM: LocalTime = LocalTime.of(7,0)
     private val horaTerM: LocalTime = LocalTime.of(15,0)
     private val horaIniT: LocalTime = LocalTime.of(12,0)
