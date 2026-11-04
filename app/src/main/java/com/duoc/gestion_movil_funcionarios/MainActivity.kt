@@ -23,11 +23,17 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.duoc.gestion_movil_funcionarios.model.Rol
+import com.duoc.gestion_movil_funcionarios.ui.screens.AdminScreen
+import com.duoc.gestion_movil_funcionarios.ui.screens.AdministrativoScreen
 import com.duoc.gestion_movil_funcionarios.ui.screens.FuncionarioScreen
 import com.duoc.gestion_movil_funcionarios.ui.screens.HomeScreen
+import com.duoc.gestion_movil_funcionarios.ui.screens.JefaturaScreen
 import com.duoc.gestion_movil_funcionarios.ui.screens.LoginScreen
 import com.duoc.gestion_movil_funcionarios.ui.screens.ProfileScreen
+import com.duoc.gestion_movil_funcionarios.ui.screens.RrHhScreen
 import com.duoc.gestion_movil_funcionarios.ui.screens.SettingsScreen
+import com.duoc.gestion_movil_funcionarios.ui.screens.SupervisorScreen
+import com.duoc.gestion_movil_funcionarios.ui.screens.TecnologiasScreen
 import com.duoc.gestion_movil_funcionarios.ui.theme.GestionMovilFuncionariosTheme
 import com.duoc.gestion_movil_funcionarios.viewmodel.LoginViewModel
 import com.duoc.gestion_movil_funcionarios.viewmodel.MainViewModel
@@ -185,12 +191,12 @@ class MainActivity : ComponentActivity() {
                             composable(Screen.Login.route){LoginScreen(navController,loginViewModel)}
 
                             composable(Screen.Funcionario.route){FuncionarioScreen(navController,viewModel,openDrawer)}
-                            composable(Screen.Administrativo.route){FuncionarioScreen(navController,viewModel,openDrawer)}
-                            composable(Screen.Jefatura.route){FuncionarioScreen(navController,viewModel,openDrawer)}
-                            composable(Screen.RrHh.route){FuncionarioScreen(navController,viewModel,openDrawer)}
-                            composable(Screen.Admin.route){FuncionarioScreen(navController,viewModel,openDrawer)}
-                            composable(Screen.Tecnologias.route){FuncionarioScreen(navController,viewModel,openDrawer)}
-                            composable(Screen.Supervistor.route){FuncionarioScreen(navController,viewModel,openDrawer)}
+                            composable(Screen.Administrativo.route){AdministrativoScreen(navController,viewModel,openDrawer) }
+                            composable(Screen.Jefatura.route){JefaturaScreen(navController,viewModel,openDrawer) }
+                            composable(Screen.RrHh.route){RrHhScreen(navController,viewModel,openDrawer) }
+                            composable(Screen.Admin.route){AdminScreen(navController,viewModel,openDrawer) }
+                            composable(Screen.Tecnologias.route){TecnologiasScreen(navController,viewModel,openDrawer) }
+                            composable(Screen.Supervistor.route){SupervisorScreen(navController,viewModel,openDrawer) }
                         }
                     }
                 }
