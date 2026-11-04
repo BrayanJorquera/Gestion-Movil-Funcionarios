@@ -25,6 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.duoc.gestion_movil_funcionarios.LogedUser
+import com.duoc.gestion_movil_funcionarios.model.Rol
 import com.duoc.gestion_movil_funcionarios.viewmodel.MainViewModel
 import com.duoc.gestion_movil_funcionarios.viewmodel.Screen
 
@@ -83,7 +84,16 @@ fun ProfileScreen(
             Text("Nombre: "+LogedUser.nombre)
             Text("Run: "+ LogedUser.numrun+"-"+ LogedUser.dvrun)
             Text("Correo: "+LogedUser.correo)
-
+            Text("Rol: "+when(LogedUser.rol){
+                Rol.FuncionarioSalud -> "Funcionario del área de salud"
+                Rol.PersonalAdministrativo -> "Personal Administrativo"
+                Rol.JefaturaCentro -> "Jefatura del centro"
+                Rol.RecursosHumanos -> "Área de recursos humanos"
+                Rol.AdministradorSistema -> "Administrador del sistema"
+                Rol.AreaTICiberseguridad -> "Area TI y cyberseguridad"
+                Rol.SupervisorInstitucional -> "Supervisor Institucional"
+                else -> "null"
+            })
         }
     }
 }
