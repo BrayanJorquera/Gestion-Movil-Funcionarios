@@ -79,21 +79,26 @@ fun ProfileScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            Text(text = "Perfil Usuario.")
-            Text("")
-            Text("Nombre: "+LogedUser.nombre)
-            Text("Run: "+ LogedUser.numrun+"-"+ LogedUser.dvrun)
-            Text("Correo: "+LogedUser.correo)
-            Text("Rol: "+when(LogedUser.rol){
-                Rol.FuncionarioSalud -> "Funcionario del área de salud"
-                Rol.PersonalAdministrativo -> "Personal Administrativo"
-                Rol.JefaturaCentro -> "Jefatura del centro"
-                Rol.RecursosHumanos -> "Área de recursos humanos"
-                Rol.AdministradorSistema -> "Administrador del sistema"
-                Rol.AreaTICiberseguridad -> "Area TI y cyberseguridad"
-                Rol.SupervisorInstitucional -> "Supervisor Institucional"
-                else -> "null"
-            })
+            if(LogedUser.logged){
+                Text(text = "Perfil Usuario.")
+                Text("")
+                Text("Nombre: "+LogedUser.nombre)
+                Text("Run: "+ LogedUser.numrun+"-"+ LogedUser.dvrun)
+                Text("Correo: "+LogedUser.correo)
+                Text("Rol: "+when(LogedUser.rol){
+                    Rol.FuncionarioSalud -> "Funcionario del área de salud"
+                    Rol.PersonalAdministrativo -> "Personal Administrativo"
+                    Rol.JefaturaCentro -> "Jefatura del centro"
+                    Rol.RecursosHumanos -> "Área de recursos humanos"
+                    Rol.AdministradorSistema -> "Administrador del sistema"
+                    Rol.AreaTICiberseguridad -> "Area TI y cyberseguridad"
+                    Rol.SupervisorInstitucional -> "Supervisor Institucional"
+                    else -> "null"
+                })
+            }else{
+                Text("Debes iniciar seccion para ver tus datos.")
+            }
+
         }
     }
 }

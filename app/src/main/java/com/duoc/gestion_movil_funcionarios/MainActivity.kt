@@ -6,6 +6,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.NavigationDrawerItem
@@ -20,6 +22,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.duoc.gestion_movil_funcionarios.model.Rol
+import com.duoc.gestion_movil_funcionarios.ui.screens.FuncionarioScreen
 import com.duoc.gestion_movil_funcionarios.ui.screens.HomeScreen
 import com.duoc.gestion_movil_funcionarios.ui.screens.LoginScreen
 import com.duoc.gestion_movil_funcionarios.ui.screens.ProfileScreen
@@ -86,6 +90,81 @@ class MainActivity : ComponentActivity() {
                                     viewModel.navigateTo(Screen.Settings)
                                 }
                             )
+                            HorizontalDivider(
+                                modifier = Modifier.padding(vertical = 8.dp),
+                                thickness = 1.dp,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                            NavigationDrawerItem(
+                                label = { Text("Funcionario de Salud") },
+                                selected = false,
+                                onClick = {
+                                    scope.launch { drawerState.close() }
+                                    viewModel.navigateTo(Screen.Funcionario)
+                                }
+                            )
+                            NavigationDrawerItem(
+                                label = { Text("Personal Administrativo") },
+                                selected = false,
+                                onClick = {
+                                    scope.launch { drawerState.close() }
+                                    viewModel.navigateTo(Screen.Administrativo)
+                                }
+                            )
+                            NavigationDrawerItem(
+                                label = { Text("Jefatura del Centro") },
+                                selected = false,
+                                onClick = {
+                                    scope.launch { drawerState.close() }
+                                    viewModel.navigateTo(Screen.Jefatura)
+                                }
+                            )
+                            NavigationDrawerItem(
+                                label = { Text("Recursos Humanos") },
+                                selected = false,
+                                onClick = {
+                                    scope.launch { drawerState.close() }
+                                    viewModel.navigateTo(Screen.RrHh)
+                                }
+                            )
+                            NavigationDrawerItem(
+                                label = { Text("Administrador del Sistema") },
+                                selected = false,
+                                onClick = {
+                                    scope.launch { drawerState.close() }
+                                    viewModel.navigateTo(Screen.Admin)
+                                }
+                            )
+                            NavigationDrawerItem(
+                                label = { Text("Area TI y ciberseguridad") },
+                                selected = false,
+                                onClick = {
+                                    scope.launch { drawerState.close() }
+                                    viewModel.navigateTo(Screen.Tecnologias)
+                                }
+                            )
+                            NavigationDrawerItem(
+                                label = { Text("Supervisor Institucional") },
+                                selected = false,
+                                onClick = {
+                                    scope.launch { drawerState.close() }
+                                    viewModel.navigateTo(Screen.Supervistor)
+                                }
+                            )
+                            HorizontalDivider(
+                                modifier = Modifier.padding(vertical = 8.dp),
+                                thickness = 1.dp,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                            NavigationDrawerItem(
+                                label = { Text("Cerrar Sesion") },
+                                selected = false,
+                                onClick = {
+                                    LogedUser.logged = false
+                                    LogedUser.rol = Rol.Null
+                                    viewModel.navigateTo(Screen.Login)
+                                }
+                            )
                         }
                     }
                 ){
@@ -104,6 +183,14 @@ class MainActivity : ComponentActivity() {
                             composable(Screen.Profile.route){ProfileScreen(navController,viewModel,openDrawer) }
                             composable(Screen.Settings.route){SettingsScreen(navController,viewModel,openDrawer)}
                             composable(Screen.Login.route){LoginScreen(navController,loginViewModel)}
+
+                            composable(Screen.Funcionario.route){FuncionarioScreen(navController,viewModel,openDrawer)}
+                            composable(Screen.Administrativo.route){FuncionarioScreen(navController,viewModel,openDrawer)}
+                            composable(Screen.Jefatura.route){FuncionarioScreen(navController,viewModel,openDrawer)}
+                            composable(Screen.RrHh.route){FuncionarioScreen(navController,viewModel,openDrawer)}
+                            composable(Screen.Admin.route){FuncionarioScreen(navController,viewModel,openDrawer)}
+                            composable(Screen.Tecnologias.route){FuncionarioScreen(navController,viewModel,openDrawer)}
+                            composable(Screen.Supervistor.route){FuncionarioScreen(navController,viewModel,openDrawer)}
                         }
                     }
                 }

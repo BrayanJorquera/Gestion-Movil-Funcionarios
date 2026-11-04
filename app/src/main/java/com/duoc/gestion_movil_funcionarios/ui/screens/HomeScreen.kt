@@ -26,6 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.duoc.gestion_movil_funcionarios.LogedUser
 import com.duoc.gestion_movil_funcionarios.viewmodel.MainViewModel
 import com.duoc.gestion_movil_funcionarios.viewmodel.Screen
 import kotlinx.coroutines.launch
@@ -58,8 +59,15 @@ fun HomeScreen(
         ){
             Text("Gestión Movil de Funcionarios")
             Spacer(modifier = Modifier.height(16.dp))
-            Button(onClick = {viewModel.navigateTo(Screen.Login)}) {
-                Text("Iniciar Secion")
+            if(LogedUser.logged){
+                Button(onClick = {viewModel.navigateTo(Screen.Profile)}) {
+                    Text("Ir a Perfil")
+                }
+            }
+            else{
+                Button(onClick = {viewModel.navigateTo(Screen.Login)}) {
+                    Text("Iniciar Secion")
+                }
             }
         }
     }
