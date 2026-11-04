@@ -1,7 +1,7 @@
 package com.duoc.gestion_movil_funcionarios.model
-
 import org.duoc.hashPasword
 
+//En una clase aparte para simular la llama a una API
 private val hashList: Map<String, String> = mapOf(  "Funcionario_M@salud.cmq.cl" to """5pIxNJqZML]6s""",
                                                     "Funcionario_T@salud.cmq.cl" to """*k@;DEOV~y\R""",
                                                     "Administrativo_M@salud.cmq.cl" to """B>lAInYubSNQUVq""",
@@ -13,9 +13,5 @@ private val hashList: Map<String, String> = mapOf(  "Funcionario_M@salud.cmq.cl"
                                                     "Supervisor@salud.cmq.cl" to """Ec`>~Lksl""")
 
 fun validatePassword(correo:String,contrasena:String): Boolean {
-    if(hashList[correo] == hashPasword(correo, contrasena)){
-        return true
-    } else {
-        return false
-    }
+    return (hashList[correo] == hashPasword(correo, contrasena))
 }

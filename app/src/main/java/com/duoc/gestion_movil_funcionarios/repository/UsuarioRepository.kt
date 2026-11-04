@@ -2,7 +2,7 @@ package com.duoc.gestion_movil_funcionarios.repository
 import com.duoc.gestion_movil_funcionarios.model.Rol
 import com.duoc.gestion_movil_funcionarios.model.Usuario
 
-class UsuarioRepository {
+object UsuarioRepository {
     private val jornadaRepository: JornadaRepository = JornadaRepository()
     private val turnosM = jornadaRepository.turnosM()
     private val turnosT = jornadaRepository.turnosT()
@@ -33,4 +33,9 @@ class UsuarioRepository {
                                                     Usuario(99999999,"9","Supervisor Institucional",
                                                             "Supervisor@salud.cmq.cl",
                                                             Rol.SupervisorInstitucional,turnosM))
+
+    //Verifica que el correo esté en la lista de usuarios
+    fun usuarioExiste(correo: String): Boolean{
+        return usuarios.any { it.correo.equals(correo, ignoreCase = true) }
+    }
 }

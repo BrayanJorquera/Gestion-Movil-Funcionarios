@@ -76,8 +76,8 @@ fun HomeScreen(
             ){
                 Text("Gestión Movil de Funcionarios")
                 Spacer(modifier = Modifier.height(16.dp))
-                Button(onClick = {viewModel.navigateTo(Screen.Settings)}) {
-                    Text("Configuración")
+                Button(onClick = {viewModel.navigateTo(Screen.Login)}) {
+                    Text("Iniciar Secion")
                 }
             }
         }
