@@ -28,7 +28,7 @@ fun hashChar(char: Char, ran: Int): Char{
 fun salt(correo:String): Int {
     var NaCl = 0
     for (char in correo.lowercase()){ //Lowercase para permitir al usuario escribir su correo como guste
-        NaCl += char.code + correo.length //Suma al assci code de cada caracter del correo, haciendo que incluso con una misma contraseña todos tengan hashes distintos.
+        NaCl += char.code //Suma al assci code de cada caracter del correo, haciendo que incluso con una misma contraseña todos tengan hashes distintos.
     }
     return NaCl
 }

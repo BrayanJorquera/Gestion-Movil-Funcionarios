@@ -5,13 +5,16 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -21,6 +24,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.duoc.gestion_movil_funcionarios.LogedUser
 import com.duoc.gestion_movil_funcionarios.viewmodel.MainViewModel
 import com.duoc.gestion_movil_funcionarios.viewmodel.Screen
 
@@ -28,12 +32,24 @@ import com.duoc.gestion_movil_funcionarios.viewmodel.Screen
 @Composable
 fun ProfileScreen(
     navController: NavController,
-    viewModel: MainViewModel = viewModel()
+    viewModel: MainViewModel = viewModel(),
+    onOpenDrawer: () -> Unit
 ) {
     val items = listOf(Screen.Home, Screen.Profile)
     var selectedItem by remember { mutableStateOf(1) }
 
     Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text("Home") },
+                navigationIcon = {
+                    IconButton(onClick = onOpenDrawer){
+                        Icon(Icons.Default.Menu, contentDescription = "Menu")
+                    }
+                }
+            )
+        },
+
         bottomBar = {
             NavigationBar {
                 items.forEachIndexed { index, screen ->
@@ -62,7 +78,12 @@ fun ProfileScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            Text(text = "Perfil")
+            Text(text = "Perfil Usuario.")
+            Text("")
+            Text("Nombre: "+LogedUser.nombre)
+            Text("Run: "+ LogedUser.numrun+"-"+ LogedUser.dvrun)
+            Text("Correo: "+LogedUser.correo)
+
         }
     }
 }

@@ -8,4 +8,5 @@ sealed class Rol {
     object AdministradorSistema : Rol()
     object AreaTICiberseguridad : Rol()
     object SupervisorInstitucional : Rol()
+    object Null : Rol() //Usado para inicializar, sin privileigos.
 }

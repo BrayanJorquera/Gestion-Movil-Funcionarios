@@ -19,7 +19,8 @@ import com.duoc.gestion_movil_funcionarios.viewmodel.Screen
 @Composable
 fun SettingsScreen(
     navController: NavController,
-    viewModel: MainViewModel = viewModel()
+    viewModel: MainViewModel = viewModel(),
+    onOpenDrawer: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -36,14 +37,6 @@ fun SettingsScreen(
             }
         ) {
             Text(text = "Volver al Inicio")
-        }
-        Spacer(modifier = Modifier.height(16.dp))
-        Button(
-            onClick = {
-                viewModel.navigateTo(Screen.Profile)
-            }
-        ) {
-            Text(text = "Ir a Perfil")
         }
     }
 }

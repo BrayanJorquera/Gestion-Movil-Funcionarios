@@ -16,6 +16,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.duoc.gestion_movil_funcionarios.LogedUser
+import com.duoc.gestion_movil_funcionarios.repository.UsuarioRepository
 import com.duoc.gestion_movil_funcionarios.viewmodel.LoginViewModel
 
 @Composable
@@ -59,7 +61,14 @@ fun LoginScreen(
 
         Button(
             onClick = {
+                var usuario = UsuarioRepository.obtenerUsuarioPorCorreo(estado.correo)
                 if(viewModel.validarLogin()){
+                    LogedUser.logged = true
+                    LogedUser.numrun = usuario!!.numrun
+                    LogedUser.dvrun = usuario.dvrun
+                    LogedUser.nombre = usuario.nombre
+                    LogedUser.correo = usuario.correo
+                    LogedUser.rol = usuario.rol
                     navController.navigate("profile")
                 }
             },
