@@ -5,7 +5,6 @@ sealed class Screen(val route: String) {
     object Home : Screen("home")
     object Profile : Screen("profile")
     object Settings : Screen("settings")
-}
 
     data class Detail(val itemId: String) : Screen("detail/{itemId}"){
         fun buildRoute():String{
