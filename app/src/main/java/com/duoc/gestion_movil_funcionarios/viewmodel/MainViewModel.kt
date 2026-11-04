@@ -18,12 +18,12 @@ class MainViewModel: ViewModel() {
     }
     fun navigateBack(){
         CoroutineScope(Dispatchers.Main).launch {
-            _navigationEvents.emit(NavigationEvent.NavigateBack)
+            _navigationEvents.emit(NavigationEvent.PopBackStack)
         }
     }
     fun navigateUp(){
         CoroutineScope(Dispatchers.Main).launch {
-            _navigationEvents.emit(NavigationEvent.NavigationUp)
+            _navigationEvents.emit(NavigationEvent.NavigateUp)
         }
     }
 }

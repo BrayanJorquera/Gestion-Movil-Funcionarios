@@ -61,7 +61,7 @@ fun HomeScreen(
                     title = { Text("Home") },
                     navigationIcon = {
                         IconButton(onClick = { scope.launch { drawerState.open() } }) {
-                            Icon(painterResource(R.drawable.Logo), contentDescription = "Logo")
+                            Icon(painterResource(R.drawable.logo), contentDescription = "logo")
                         }
                     }
                 )
